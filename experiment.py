@@ -45,12 +45,12 @@ for x in xrange(start, end, 1000):
 		try:
 			runsarray = list()
 			for j in range(5):
-				r = subprocess.check_output('./fuzz.py', env=interpose_env)
+				r = subprocess.check_output('./nonatomic.py', env=interpose_env)
 				runsarray.append(int(r.split()[0]))
 			runs = sum(runsarray)/5.0
 		except subprocess.CalledProcessError as e:
 			is_good = False
-			print('Error(fuzz.py): MAX_DELAY {max_delay}, iteration {num} - {error}'.format(max_delay=x, num=i, error=e))
+			print('Error(nonatomic.py): MAX_DELAY {max_delay}, iteration {num} - {error}'.format(max_delay=x, num=i, error=e))
 		try:
 			m = subprocess.check_output(['make', 'perftest'])
 			time = m.split('\n')[1].split()[0]
