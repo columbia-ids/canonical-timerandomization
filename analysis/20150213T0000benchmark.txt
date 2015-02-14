@@ -1,0 +1,4 @@
+(./perftest)
+2.886885e-07 seconds per increment averaged over 10000000 increments.
+2.792581e-07 seconds per increment averaged over 10000000 increments.
+2.81089e-07 seconds per increment averaged over 10000000 increments.
