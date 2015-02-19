@@ -8,9 +8,9 @@ if len(sys.argv) < 2:
 	print "Usage: gen_fig.py <results filename> [<microbench column>] [<exploit measure column>]"
 	sys.exit()
 filename = sys.argv[1]
-if len(sys.argv) > 2: microbench_column = sys.argv[2]
+if len(sys.argv) > 2: microbench_column = int(sys.argv[2])
 else: microbench_column = -1
-if len(sys.argv) > 3: exploit_column = sys.argv[3]
+if len(sys.argv) > 3: exploit_column = int(sys.argv[3])
 else: exploit_column = 2
 
 microbench = list()
