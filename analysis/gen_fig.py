@@ -2,6 +2,8 @@
 import csv, sys
 import matplotlib.pyplot as plt
 
+BASELINE = 263
+
 if len(sys.argv) < 2:
 	print "Usage: gen_fig.py <results filename> [<microbench column>] [<exploit measure column>]"
 	sys.exit()
@@ -25,9 +27,10 @@ xmin = min(microbench)
 xmax = max(microbench)
 xborder = (xmax-xmin) * 0.05
 ymin = min(exploit)
-ymax = max(exploit)
+ymax = max(max(exploit), BASELINE)
 plt.semilogy()
 plt.axis((xmin-xborder, xmax+xborder, ymin/2, ymax*2))
+plt.axhline(y=BASELINE, color='r')
 plt.title('Post-synchronization NOP Injection\n(Non-atomic Code Region Assumed to be Atomic)')
 plt.xlabel(r'Microbenchmark ($\mu s$)')
 plt.ylabel('Cost to Exploit (loop count)')
