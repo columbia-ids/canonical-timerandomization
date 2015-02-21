@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import csv, sys
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 BASELINE = 263
@@ -22,7 +23,9 @@ with open(filename, 'r') as csvfile:
 		microbench.append(float(row[microbench_column]) * 1e6)
 		exploit.append(float(row[exploit_column]))
 
-plt.scatter(microbench, exploit)
+font = {'size':16}
+mpl.rc('font', **font)
+plt.scatter(microbench, exploit, marker='.')
 xmin = min(microbench)
 xmax = max(microbench)
 xborder = (xmax-xmin) * 0.05
@@ -31,7 +34,7 @@ ymax = max(max(exploit), BASELINE)
 plt.semilogy()
 plt.axis((xmin-xborder, xmax+xborder, ymin/2, ymax*2))
 plt.axhline(y=BASELINE, color='r')
-plt.title('Post-synchronization NOP Injection\n(Non-atomic Code Region Assumed to be Atomic)')
+plt.title('Post-synchronization NOP Injection\n(Nonatomic Operations Assumed to be Atomic)')
 plt.xlabel(r'Microbenchmark ($\mu s$)')
 plt.ylabel('Cost to Exploit (loop count)')
-plt.savefig(filename[:-3] + 'pdf', bbox_inches='tight')
+plt.savefig(filename[:-3] + 'png', bbox_inches='tight', format='png')
